@@ -49,3 +49,10 @@ TEST(StringCalculatorAddTests, ExpectSumWithCustomDelimiterwithNegative) {
      add(input);
   
 }
+
+TEST(StringCalculatorAddTests, ExpectSumWithCustomDelimiterwithEmptyString) {
+   
+    const char*  input = "";
+     add(input);
+  
+}
