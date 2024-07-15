@@ -15,11 +15,21 @@ int is_number(const char *str) {
     return 1;
 }
 
-// Function to split the string based on delimiters and calculate the sum
-int split_and_sum(const char *str, const char *delimiters) {
+// Helper function to extract the custom delimiter
+void get_custom_delimiter(const char *input, char *delimiters) {
+    const char *delimiter_end = strstr(input, "\n");
+    if (delimiter_end != NULL) {
+        size_t delimiter_length = delimiter_end - input - 2;
+        strncpy(delimiters, input + 2, delimiter_length);
+        delimiters[delimiter_length] = '\0';
+    }
+}
+
+// Helper function to tokenize and sum the numbers
+int tokenize_and_sum(const char *numbers, const char *delimiters) {
     int sum = 0;
     char input[MAX_INPUT_LENGTH];
-    strncpy(input, str, MAX_INPUT_LENGTH);
+    strncpy(input, numbers, MAX_INPUT_LENGTH);
     
     char *token = strtok(input, delimiters);
     while (token != NULL) {
@@ -28,7 +38,8 @@ int split_and_sum(const char *str, const char *delimiters) {
             if (num < 0) {
                 fprintf(stderr, "negatives not allowed: %d\n", num);
                 exit(EXIT_FAILURE);
-            } else if (num <= 1000) {
+            }
+            if (num <= 1000) {
                 sum += num;
             }
         }
@@ -48,14 +59,9 @@ int add(const char *input) {
     const char *numbers = input;
 
     if (strncmp(input, "//", 2) == 0) {
-        const char *delimiter_end = strstr(input, "\n");
-        if (delimiter_end != NULL) {
-            size_t delimiter_length = delimiter_end - input - 2;
-            strncpy(delimiters, input + 2, delimiter_length);
-            delimiters[delimiter_length] = '\0';
-            numbers = delimiter_end + 1;
-        }
+        get_custom_delimiter(input, delimiters);
+        numbers = strstr(input, "\n") + 1;
     }
     
-    return split_and_sum(numbers, delimiters);
+    return tokenize_and_sum(numbers, delimiters);
 }
