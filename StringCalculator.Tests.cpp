@@ -1,5 +1,9 @@
 #include <gtest/gtest.h>
-#include "StringCalculator.h"
+
+// Declare the add function to be tested
+extern "C" {
+    int add(const char *input);
+}
 
 // Test case for empty input string
 TEST(StringCalculatorAddTests, ExpectZeroForEmptyInput) {
@@ -89,4 +93,9 @@ TEST(StringCalculatorAddTests, HandleLargeInput) {
     input[MAX_INPUT_LENGTH - 1] = '\0';
     int result = add(input);
     ASSERT_GT(result, 0);
+}
+
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }
