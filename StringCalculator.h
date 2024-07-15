@@ -46,7 +46,7 @@ void add_to_sum(const char *token, int *sum) {
     int num = atoi(token);
     if (num < 0) {
         fprintf(stderr, "negatives not allowed: %d\n", num);
-        exit(EXIT_FAILURE);
+       
     }
     if (num <= 1000) {
         *sum += num;
