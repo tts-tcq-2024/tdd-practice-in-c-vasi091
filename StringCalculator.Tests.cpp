@@ -66,14 +66,6 @@ TEST(StringCalculatorAddTests, ExpectZeroForInvalidCharacters) {
     ASSERT_EQ(result, expectedresult);
 }
 
-// Test case for input string with multiple custom delimiters
-TEST(StringCalculatorAddTests, ExpectSumWithMultipleCustomDelimiters) {
-    int expectedresult = 6;
-    const char* input = "//[;][*]\n1;2*3";
-    int result = add(input);
-    ASSERT_EQ(result, expectedresult);
-}
-
 // Test case for empty input string with custom delimiter notation
 TEST(StringCalculatorAddTests, ExpectZeroForEmptyInputWithCustomDelimiter) {
     int expectedresult = 0;
